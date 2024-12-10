@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Space, fetchSpaces, deleteSpace } from '../utils/api';
+import { Space, fetchSpacesByUser, deleteSpace } from '../utils/api';
 import { useRouter } from 'next/navigation';
 
 interface SpaceListProps {
@@ -13,7 +13,7 @@ const SpaceList: React.FC<SpaceListProps> = ({ refresh }) => {
   const router = useRouter();
 
   useEffect(() => {
-    fetchSpaces()
+    fetchSpacesByUser()
       .then(setSpaces)
       .catch(error => console.error(error));
   }, [refresh]);

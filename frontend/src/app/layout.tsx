@@ -18,11 +18,10 @@ export default function RootLayout({
   const router = useRouter();
 
   useEffect(() => {
-    // const token = localStorage.getItem('token');
-    // if (!token) {
-    //   router.push('/login');
-    // }
-    router.push('/');
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/login');
+    }
   }, [router]);
 
   return (
