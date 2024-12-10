@@ -7,7 +7,6 @@ import SpaceForm from '../../../../components/SpaceForm';
 const EditSpacePage: React.FC = () => {
   const router = useRouter();
   const { id } = useParams();
-  console.log('id:', id);
 
   const handleSave = () => {
     router.push('/spaces');

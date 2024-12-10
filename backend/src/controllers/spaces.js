@@ -35,7 +35,6 @@ const getSpaceById = (req, res) => {
 
     try {
         const space = getSpaceByIdModel(id);
-        console.log('space id',space,id);
         if (!space) return res.status(404).json({ error: 'Space not found.' });
         res.status(200).json(space);
     } catch (error) {
@@ -63,7 +62,6 @@ const addSpace = (req, res) => {
 };
 
 const updateSpace = (req, res) => {
-    console.log({...req.params,...req.body});
     const { id } = req.params;
     const { name, type, capacity, occupied, price_per_unit } = req.body;
     const user_id = req.user.id;
