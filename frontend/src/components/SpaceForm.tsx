@@ -8,7 +8,8 @@ interface SpaceFormProps {
 }
 
 const SpaceForm: React.FC<SpaceFormProps> = ({ id, onSave }) => {
-  const [formData, setFormData] = useState<Space>({ name: '', type: 'hanger', capacity: 0, price_per_unit: 0 });
+  const [formData, setFormData] = useState<Space>({ name: '', type: 'hanger', capacity: 1, price_per_unit: 0 });
+  const [errors, setErrors] = useState<{ capacity?: string }>({});
 
   useEffect(() => {
     if (id) {
@@ -18,11 +19,25 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ id, onSave }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === 'capacity') {
+      const intValue = parseInt(value, 10);
+      if (intValue < 1) {
+        setErrors(prev => ({ ...prev, capacity: 'Capacity must be a positive integer.' }));
+      } else {
+        setErrors(prev => ({ ...prev, capacity: undefined }));
+      }
+      setFormData({ ...formData, [name]: intValue });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.capacity < 1 || !Number.isInteger(formData.capacity)) {
+      setErrors({ capacity: 'Capacity must be a positive integer.' });
+      return;
+    }
     try {
       if (id) {
         await updateSpace(id, formData);
@@ -65,12 +80,15 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ id, onSave }) => {
         <input
           name="capacity"
           type="number"
+          min={1}
+          step={1}
           value={formData.capacity}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
           placeholder="Capacity"
           required
         />
+        {errors.capacity && <p className="text-red-500 text-sm">{errors.capacity}</p>}
       </div>
       <div>
         <label className="block mb-2 text-gray-700 dark:text-gray-300 font-bold">Price per unit</label>
