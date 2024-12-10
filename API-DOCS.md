@@ -130,7 +130,6 @@ This document provides detailed information about the API endpoints used in the 
     "name": "string",
     "type": "string", // 'hanger' or 'shelf'
     "capacity": "number",
-    "occupied": "number",
     "price_per_unit": "number"
   }
   ```
