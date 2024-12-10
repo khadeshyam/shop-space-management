@@ -13,12 +13,12 @@ const register = async (req, res) => {
     }
 
     try {
-        if (getUserByEmail(email)) return res.status(409).json({ error: 'Email already in use.' });
+        const existingUser = await getUserByEmail(email);
+        if (existingUser) return res.status(409).json({ error: 'Email already in use.' });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const info = createUser(username, email, hashedPassword);
-        const token = jwt.sign({ id: info.lastInsertRowid, email }, SECRET_KEY, { expiresIn: '1h' });
-        res.status(201).json({ token });
+        await createUser(username, email, hashedPassword);
+        res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Registration failed.' });
@@ -34,14 +34,14 @@ const login = async (req, res) => {
     }
 
     try {
-        const user = getUserByEmail(email);
+        const user = await getUserByEmail(email);
         if (!user) return res.status(404).json({ error: 'User not found.' });
 
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) return res.status(401).json({ error: 'Invalid password.' });
 
         const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
-        res.status(200).json({ token });
+        res.status(200).json({ token, user_id: user.id });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Login failed.' });

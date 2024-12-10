@@ -50,7 +50,7 @@ const SpaceList: React.FC<SpaceListProps> = ({ refresh, filterType, searchQuery,
   };
 
   return (
-    <div>
+    <div className="p-4 sm:p-6 lg:p-8">
       {spaces.length === 0 ? (
         <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md text-center text-gray-700 dark:text-gray-300">
           No spaces found.
@@ -62,8 +62,8 @@ const SpaceList: React.FC<SpaceListProps> = ({ refresh, filterType, searchQuery,
               key={space.id}
               className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="flex justify-between items-center">
-                <div>
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                <div className="mb-4 sm:mb-0">
                   <div className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
                     {space.name}
                   </div>

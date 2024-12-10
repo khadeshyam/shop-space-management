@@ -25,16 +25,16 @@ module.exports = {
         const stmt = db.prepare('SELECT * FROM spaces WHERE user_id = ?');
         return stmt.all(user_id);
     },
-    getSpaceById: (id, user_id) => {
-        const stmt = db.prepare('SELECT * FROM spaces WHERE id = ? AND user_id = ?');
-        return stmt.get(id, user_id);
+    getSpaceById: (id) => {
+        const stmt = db.prepare('SELECT * FROM spaces WHERE id = ?');
+        return stmt.get(id);
     },
     updateSpace: (id, name, type, capacity, occupied, price_per_unit, user_id) => {
         const stmt = db.prepare('UPDATE spaces SET name = ?, type = ?, capacity = ?, occupied = ?, price_per_unit = ? WHERE id = ? AND user_id = ?');
         return stmt.run(name, type, capacity, occupied, price_per_unit, id, user_id);
     },
-    deleteSpace: (id, user_id) => {
-        const stmt = db.prepare('DELETE FROM spaces WHERE id = ? AND user_id = ?');
-        return stmt.run(id, user_id);
+    deleteSpace: (id) => {
+        const stmt = db.prepare('DELETE FROM spaces WHERE id = ?');
+        return stmt.run(id);
     }
 };
