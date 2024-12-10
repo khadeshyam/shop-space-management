@@ -1,56 +1,57 @@
-# Shop Space Management Documentation
+# Shop Space Management
 
 ## Overview
-Shop Space Management is a full-stack application designed to help users manage their shop spaces efficiently. It features user authentication, space management functionalities, and a responsive frontend interface built with modern technologies.
+
+**Shop Space Management** is a full-stack application that allows users to efficiently manage their shop spaces. The application includes features like **user authentication**, **space management**, and a **responsive interface** built with modern technologies.
+
+This repository contains both the frontend and backend code, enabling a seamless experience for managing shop spaces.
+
+For detailed information about the API endpoints used in this project, refer to the [API Documentation](./API-DOCS.md).
+
+---
 
 ## Table of Contents
-- Features
-- Technologies Used
-- Getting Started
-- Prerequisites
-- Installation
-- Usage
-- API Endpoints
-- Frontend
-- Contributing
-- License
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
 ## Features
 
-### User Authentication
-- Secure registration and login using JWT.
-- Password hashing using bcrypt for enhanced security.
+- **User Authentication**:  
+  - Secure registration and login using JWT.
+  - Password hashing with bcrypt for enhanced security.
 
-### Space Management
-- Create, view, and delete shop spaces.
-- Simple API integration for managing space operations.
+- **Space Management**:  
+  - Create, view, update, and delete shop spaces.
 
-### Responsive Design
-- Built with Next.js and Tailwind CSS for a seamless user experience.
+- **Responsive Design**:  
+  - Built with Next.js and Tailwind CSS for a seamless user experience.
 
-### API Integration
-- The frontend communicates with backend APIs using Axios for data fetching and manipulation.
+- **API Integration**:  
+  - Frontend communicates with backend APIs for data management.
 
 ---
 
 ## Technologies Used
 
 ### Backend
-- **Express**: Fast, unopinionated, minimalist web framework for Node.js.
-- **Better-SQLite3**: SQLite3 bindings with a focus on simplicity and performance.
-- **bcrypt**: Library for hashing passwords securely.
-- **jsonwebtoken**: Implementation for handling JSON Web Tokens.
-- **validator**: For string validation and sanitization.
-- **CORS**: Express middleware to enable Cross-Origin Resource Sharing.
+- **Express**: Web framework for Node.js.
+- **SQLite**: Lightweight database solution using better-sqlite3.
+- **bcrypt**: Secure password hashing.
+- **jsonwebtoken**: JWT implementation.
+- **validator**: Data validation and sanitization.
+- **CORS**: Middleware for cross-origin requests.
 
 ### Frontend
 - **Next.js**: React framework for production.
-- **React**: JavaScript library for building user interfaces.
-- **Axios**: Promise-based HTTP client for data requests.
-- **Tailwind CSS**: Utility-first CSS framework for styling.
-- **TypeScript**: A typed superset of JavaScript.
+- **React**: JavaScript library for user interfaces.
+- **Axios**: HTTP client for API communication.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **TypeScript**: Typed JavaScript for reliability.
 
 ---
 
@@ -58,36 +59,31 @@ Shop Space Management is a full-stack application designed to help users manage 
 
 ### Prerequisites
 - **Node.js** v16 or higher.
-- **npm** or **Yarn** package manager.
+- **npm** or **Yarn**.
 
 ### Installation
 
-1. **Clone the repository**:
+1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/shop-space-management.git
    ```
-
-2. **Navigate to the backend directory and install dependencies**:
+2. Set up the backend:
    ```bash
    cd shop-space-management/backend
    npm install
    ```
-
-3. **Set up environment variables**:
-   - Create a `.env` file in the `backend` directory based on the provided `.env.example`.
-
-4. **Start the backend server**:
+3. Configure environment variables:
+   - Create a `.env` file in the `backend` directory based on `.env.example`.
+4. Start the backend server:
    ```bash
    npm start
    ```
-
-5. **Navigate to the frontend directory and install dependencies**:
+5. Set up the frontend:
    ```bash
    cd ../frontend
    npm install
    ```
-
-6. **Start the frontend development server**:
+6. Start the frontend server:
    ```bash
    npm run dev
    ```
@@ -97,85 +93,24 @@ Shop Space Management is a full-stack application designed to help users manage 
 
 ---
 
-## Usage
-
-### Register
-- **Create a new account** by providing a username, email, and password.
-
-### Login
-- **Access your account** using your email and password.
-
-### Manage Spaces
-- **Add new shop spaces**, **view existing ones**, and **delete as needed**.
-
----
-
-## API Endpoints
-
-### Authentication
-
-#### Register User
-- **Method**: POST
-- **Endpoint**: `/api/auth/register`
-- **Body**:
-  ```json
-  {
-    "username": "string",
-    "email": "string",
-    "password": "string"
-  }
-  ```
-
-#### Login User
-- **Method**: POST
-- **Endpoint**: `/api/auth/login`
-- **Body**:
-  ```json
-  {
-    "email": "string",
-    "password": "string"
-  }
-  ```
-
-### Space Management
-
-#### Delete a Space
-- **Method**: DELETE
-- **Endpoint**: `/api/spaces/:id`
-- **Headers**:
-  ```json
-  {
-    "Authorization": "Bearer <your-token>"
-  }
-  ```
-
----
-
-## Frontend
-
-The frontend is built with **Next.js** and styled using **Tailwind CSS**. It communicates with the backend APIs using **Axios** for seamless data fetching and manipulation.
-
----
-
 ## Contributing
 
-Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
+Contributions are welcome! Please follow these steps:
 
-### Contribution Steps:
-1. **Fork the project**.
-2. **Create your feature branch**:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix:
    ```bash
-   git checkout -b feature/YourFeature
+   git checkout -b feature/your-feature-name
    ```
-3. **Commit your changes**:
+3. Commit your changes:
    ```bash
-   git commit -m 'Add some feature'
+   git commit -m "Add your message here"
    ```
-4. **Push to the branch**:
+4. Push to the branch:
    ```bash
-   git push origin feature/YourFeature
+   git push origin feature/your-feature-name
    ```
-5. **Open a pull request**.
+5. Submit a pull request.
 
 ---
 
