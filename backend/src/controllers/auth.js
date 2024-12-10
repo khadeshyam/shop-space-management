@@ -17,7 +17,7 @@ const register = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const info = createUser(username, email, hashedPassword);
-        const token = jwt.sign({ id: info.lastInsertRowid, email }, SECRET_KEY);
+        const token = jwt.sign({ id: info.lastInsertRowid, email }, SECRET_KEY, { expiresIn: '1h' });
         res.status(201).json({ token });
     } catch (error) {
         console.error(error);
@@ -40,7 +40,7 @@ const login = async (req, res) => {
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) return res.status(401).json({ error: 'Invalid password.' });
 
-        const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY);
+        const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
         res.status(200).json({ token });
     } catch (error) {
         console.error(error);
@@ -48,4 +48,14 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { register, login };
+const logout = (req, res) => {
+    const token = req.headers['authorization'].split(' ')[1];
+    if (token) {
+        jwt.sign({ token }, SECRET_KEY, { expiresIn: 0 });
+        res.status(200).json({ message: 'Logged out successfully' });
+    } else {
+        res.status(400).json({ error: 'Token not provided' });
+    }
+};
+
+module.exports = { register, login, logout };

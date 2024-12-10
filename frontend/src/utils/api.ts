@@ -48,11 +48,14 @@ export async function login(user: User): Promise<{ token: string }> {
     password: user.password,
   });
   localStorage.setItem('token', response.data.token);
+  localStorage.setItem('user_id', response.data.user_id);
   return response.data;
 }
 
 export async function logout(): Promise<void> {
+  await axiosInstance.post('/logout');
   localStorage.removeItem('token');
+  localStorage.removeItem('user_id');
 }
 
 // Space CRUD Functions
