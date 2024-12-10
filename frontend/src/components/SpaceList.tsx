@@ -13,7 +13,8 @@ const SpaceList: React.FC<SpaceListProps> = ({ refresh }) => {
   const router = useRouter();
 
   useEffect(() => {
-    fetchSpacesByUser()
+	const userId = localStorage.getItem('user_id');
+    fetchSpacesByUser(userId)
       .then(setSpaces)
       .catch(error => console.error(error));
   }, [refresh]);

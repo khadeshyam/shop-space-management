@@ -46,6 +46,7 @@ export default function Login() {
     try {
       const response = await login({ email, password });
       localStorage.setItem('token', response.token);
+	  localStorage.setItem('user_id', response.user_id);
       router.push('/');
     } catch (error) {
       setErrors({ password: 'Invalid credentials' });
